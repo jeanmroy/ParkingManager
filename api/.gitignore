@@ -1,0 +1,42 @@
+# Maven
+target/
+!.mvn/wrapper/maven-wrapper.jar
+
+# IDE (Spécifique à votre IDE, exemple IntelliJ IDEA)
+.idea/
+*.iml
+
+# IDE (Autres IDE, à supprimer si non utilisés)
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+.vscode/
+
+# Fichiers compilés Java
+bin/
+*.class
+*.war
+*.ear
+
+# Docker
+*.log
+docker-compose.override.yml
+
+# Fichiers de configuration de l'environnement
+# .env
+# application-*.properties
+# *.keystore
+
+# Autres
+.DS_Store
+Thumbs.db
+*~
