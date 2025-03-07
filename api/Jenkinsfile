@@ -1,9 +1,18 @@
 pipeline {
     agent any
     stages {
-        stage('Build') { 
+        stage('Setup') {
             steps {
-                sh 'mvn -B -DskipTests clean package' 
+                script {
+                    dir('api') {
+                        // This changes the working directory for all later stages
+                    }
+                }
+            }
+        }
+        stage('Build') {
+            steps {
+                sh 'mvn -B -DskipTests clean package'
             }
         }
         stage('Test') {
