@@ -5,7 +5,6 @@ import java.util.Set;
 import com.jmroy.api.parkingmanager.domain.shared.BaseEntity;
 import com.jmroy.api.parkingmanager.domain.vehicule.Vehicule;
 
-import jakarta.annotation.Nullable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import lombok.Data;

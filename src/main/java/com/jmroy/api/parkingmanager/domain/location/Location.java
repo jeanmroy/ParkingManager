@@ -6,7 +6,6 @@ import com.jmroy.api.parkingmanager.domain.shared.BaseEntity;
 import com.jmroy.api.parkingmanager.domain.vehicule.Vehicule;
 import com.jmroy.api.parkingmanager.domain.vehicule.VehiculeType;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
