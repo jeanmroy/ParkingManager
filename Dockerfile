@@ -5,10 +5,10 @@ FROM openjdk:21-jdk-slim
 WORKDIR /app
 
 # Copie le fichier JAR de l'application dans le conteneur
-COPY target/*.jar app.jar
+COPY target/parkingmanager-0.1.0-SNAPSHOT.jar app.jar
 
 # Expose le port sur lequel l'application s'exécute
 EXPOSE 8080
 
 # Commande pour exécuter l'application
-CMD ["java", "-jar", "app.jar"]
+CMD ["java", "-jar", "-Dspring.profiles.active=local", "app.jar"]
