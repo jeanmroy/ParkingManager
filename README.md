@@ -11,6 +11,7 @@ This is a backend-only Spring Boot project designed to manage paid parking space
 
 ## TO-DO
 
+- **Prerequisites:** Test if the application is well running in JDK17
 - **Branches:** Make a dev branch, and use proper features branches from now on.
 - **Property:** Add the `cost` property.
 - **Input Validation:** Implement robust validation in entities and services.
@@ -18,6 +19,20 @@ This is a backend-only Spring Boot project designed to manage paid parking space
 - **Spring Security:** Enable Spring Security with username/password authentication.
 - **Security Configuration:** Set up a security filter chain to protect API endpoints.
 - **Secret Management:** Integrate a secret manager for sensitive data.
+
+## Prerequisites
+
+Before you can build and run this application, you'll need the following software installed on your system:
+
+- **Java Development Kit (JDK) 21:**
+  - This project is built using Eclipse Temurin Java 21. Ensure you have JDK 21 or a compatible version installed. You can download it from [Adoptium's website](https://adoptium.net/en-GB/temurin/releases/).
+  - Verify your installation by running `java -version` in your terminal.
+- **Apache Maven:**
+  - Maven is used for building and managing the project's dependencies. It has be developed with Maven 3.9.9. While older versions may work, using a recent version is advised for optimal compatibility.
+  - You can download Maven from the [Apache Maven website](https://maven.apache.org/download.cgi).
+  - Verify your installation by running `mvn -version` in your terminal.
+- **Docker (Optional):**
+  - If you intend to run the application using Docker, you'll need Docker installed and running on your system. You can download Docker from [Docker's website](https://www.docker.com/products/docker-desktop/).
 
 ## How to Run
 
@@ -45,6 +60,12 @@ This is a backend-only Spring Boot project designed to manage paid parking space
     - This will start the Spring Boot application on `http://localhost:8080`.
 
 3.  **Build and Run with Docker Image (alternative):**
+
+    - Package the application with the following command :
+
+      ```bash
+      mvn clean package
+      ```
 
     - Ensure Docker is running.
     - From the project root directory, build the Docker image using docker command:
