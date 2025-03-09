@@ -11,6 +11,7 @@ This is a backend-only Spring Boot project designed to manage paid parking space
 
 ## TO-DO
 
+- **Branches:** Make a dev branch, and use proper features branches from now on.
 - **Property:** Add the `cost` property.
 - **Input Validation:** Implement robust validation in entities and services.
 - **Testing:** Write unit and integration tests to validate validations and controllers.
