@@ -13,6 +13,27 @@
 	<version>${revision}</version>
 	<name>Parking Manager</name>
 	<description>Little CRUD project to manage the paid parking spaces in my yard.</description>
+	<profiles>
+		<!-- Local Profile -->
+		<profile>
+			<id>local</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<spring.profiles.active>local</spring.profiles.active>
+			</properties>
+		</profile>
+
+		<!-- Debug Profile -->
+		<profile>
+			<id>debug</id>
+			<properties>
+				<spring.profiles.active>debug</spring.profiles.active>
+			</properties>
+		</profile>
+	</profiles>
+
 	<properties>
 		<app.version>0.0.1</app.version>
 		<revision>${app.version}-SNAPSHOT</revision>
@@ -22,6 +43,8 @@
 		
 
 	</properties>
+
+	
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
