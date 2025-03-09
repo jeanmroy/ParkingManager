@@ -44,6 +44,25 @@ This is a backend-only Spring Boot project designed to manage paid parking space
 
     - This will start the Spring Boot application on `http://localhost:8080`.
 
+3.  **Build and Run with Docker Image (alternative):**
+
+    - Ensure Docker is running.
+    - From the project root directory, build the Docker image using docker command:
+
+      ```powershell
+      docker build -t parkingmanager-api .
+      ```
+
+    - This command will build the Docker image and tag it as parkingmanager-api.
+
+    - Run the Docker container using the following command:
+
+      ```powershell
+      docker run -p 8080:8080 parkingmanager-api
+      ```
+
+    - This will start the application in a Docker container, mapping port 8080 of the container to port 8080 on your host machine. `http://localhost:8080`
+
 ## Actuator Health Endpoint
 
 - **Browser:** Open your web browser and navigate to `http://localhost:8080/actuator/health`.
