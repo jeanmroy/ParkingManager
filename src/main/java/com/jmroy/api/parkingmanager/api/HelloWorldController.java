@@ -1,4 +1,4 @@
-package com.jmroy.api.parkingmanager.api.helloworld;
+package com.jmroy.api.parkingmanager.api;
 
 import lombok.Data;
 import org.springframework.web.bind.annotation.GetMapping;
