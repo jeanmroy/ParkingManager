@@ -1,12 +1,15 @@
 package com.jmroy.api.parkingmanager.api;
 
-import com.jmroy.api.parkingmanager.application.location.LocationService;
-import com.jmroy.api.parkingmanager.application.vehicule.VehiculeDTO;
-
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.jmroy.api.parkingmanager.application.location.LocationDTO;
+import com.jmroy.api.parkingmanager.application.location.LocationService;
+
+import java.util.List;
+
 @RestController
-@RequestMapping("/locations")
+@RequestMapping("/api/locations")
 public class LocationController {
 
     private final LocationService locationService;
@@ -15,13 +18,29 @@ public class LocationController {
         this.locationService = locationService;
     }
 
-    @PostMapping("/{locationId}/vehicules")
-    public void addVehicule(@PathVariable Long locationId, @RequestBody VehiculeDTO vehiculeDTO) {
-        locationService.addVehicule(locationId, vehiculeDTO);
+    @GetMapping
+    public List<LocationDTO> getAllLocations() {
+        return locationService.getAllLocations();
     }
 
-    @DeleteMapping("/{locationId}/vehicules/{vehiculeId}")
-    public void removeVehicule(@PathVariable Long locationId, @PathVariable Long vehiculeId) {
-        locationService.removeVehicule(locationId, vehiculeId);
+    @GetMapping("/{id}")
+    public LocationDTO getLocationById(@PathVariable Long id) {
+        return locationService.getLocationById(id);
+    }
+
+    @PostMapping
+    public LocationDTO createLocation(@RequestBody LocationDTO locationDTO) {
+        return locationService.createLocation(locationDTO);
+    }
+
+    @PutMapping("/{id}")
+    public LocationDTO updateLocation(@PathVariable Long id, @RequestBody LocationDTO locationDTO) {
+        return locationService.updateLocation(id, locationDTO);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteLocation(@PathVariable Long id) {
+        locationService.deleteLocation(id);
+        return ResponseEntity.noContent().build();
     }
 }

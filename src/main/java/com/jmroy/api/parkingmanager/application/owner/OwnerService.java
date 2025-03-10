@@ -1,9 +1,10 @@
 package com.jmroy.api.parkingmanager.application.owner;
 
 import com.jmroy.api.parkingmanager.domain.owner.Owner;
-import com.jmroy.api.parkingmanager.domain.vehicule.Vehicule;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class OwnerService {
@@ -16,31 +17,41 @@ public class OwnerService {
         this.ownerMapper = ownerMapper;
     }
 
-    public Owner findById(Long ownerId) {
-        return ownerRepository.findById(ownerId).orElseThrow(() -> new IllegalArgumentException("Owner not found"));
+    public List<OwnerDTO> getAllOwners() {
+        return ownerRepository.findAll().stream()
+                .map(ownerMapper::toDto)
+                .collect(Collectors.toList());
     }
 
-    @Transactional
-    public void addVehicule(Long ownerId, com.jmroy.api.parkingmanager.application.vehicule.VehiculeDTO vehiculeDTO) {
-        Owner owner = findById(ownerId);
-        Vehicule vehicule = ownerMapper.toEntity(vehiculeDTO);
-        owner.getVehicules().add(vehicule);
-        vehicule.setOwner(owner);
-        ownerRepository.save(owner);
+    public OwnerDTO getOwnerById(Long id) {
+        Owner owner = ownerRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Owner not found"));
+        return ownerMapper.toDto(owner);
     }
 
-    @Transactional
-    public void removeVehicule(Long ownerId, Long vehiculeId) {
-        Owner owner = findById(ownerId);
-        Vehicule vehicule = findVehiculeById(vehiculeId);
-        owner.getVehicules().remove(vehicule);
-        vehicule.setOwner(null);
-        ownerRepository.save(owner);
+    public OwnerDTO createOwner(OwnerDTO ownerDTO) {
+        Owner owner = ownerMapper.toEntity(ownerDTO);
+        owner = ownerRepository.save(owner);
+        return ownerMapper.toDto(owner);
     }
 
-    public Vehicule findVehiculeById(Long vehiculeId) {
-        // Implement this method to find a Vehicule by its ID
-        // This is a placeholder implementation
-        return new Vehicule();
+    public OwnerDTO updateOwner(Long id, OwnerDTO ownerDTO) {
+        Owner owner = ownerRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Owner not found"));
+
+        owner.setFirstName(ownerDTO.getFirstName());
+        owner.setLastName(ownerDTO.getLastName());
+        owner.setEmail(ownerDTO.getEmail());
+        owner.setPhoneNumber(ownerDTO.getPhoneNumber());
+
+        owner = ownerRepository.save(owner);
+        return ownerMapper.toDto(owner);
+    }
+
+    public void deleteOwner(Long id) {
+        if (!ownerRepository.existsById(id)) {
+            throw new IllegalArgumentException("Owner not found");
+        }
+        ownerRepository.deleteById(id);
     }
 }

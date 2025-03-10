@@ -19,7 +19,7 @@ public class Owner extends BaseEntity {
     private String firstName;
     private String lastName;
     private String note;
-    private String phone;
+    private String phoneNumber;
 
     @OneToMany(mappedBy = "owner")
     private Set<Vehicule> vehicules;
