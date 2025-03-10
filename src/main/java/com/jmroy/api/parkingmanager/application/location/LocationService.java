@@ -1,10 +1,10 @@
 package com.jmroy.api.parkingmanager.application.location;
 
-import com.jmroy.api.parkingmanager.application.vehicule.VehiculeDTO;
 import com.jmroy.api.parkingmanager.domain.location.Location;
-import com.jmroy.api.parkingmanager.domain.vehicule.Vehicule;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class LocationService {
@@ -17,36 +17,35 @@ public class LocationService {
         this.locationMapper = locationMapper;
     }
 
-    @Transactional
-    public void addVehicule(Long locationId, VehiculeDTO vehiculeDTO) {
-        Location location = findById(locationId);
-        Vehicule vehicule = locationMapper.toEntity(vehiculeDTO);
-        if (location.isAvailable()) {
-            location.getVehicules().add(vehicule);
-            vehicule.setLocation(location);
-            locationRepository.save(location);
-        } else {
-            throw new IllegalStateException("No available space in this location");
-        }
+    public List<LocationDTO> getAllLocations() {
+        return locationRepository.findAll().stream()
+                .map(locationMapper::toDto)
+                .collect(Collectors.toList());
     }
 
-    @Transactional
-    public void removeVehicule(Long locationId, Long vehiculeId) {
-        Location location = findById(locationId);
-        Vehicule vehicule = findVehiculeById(vehiculeId);
-        location.getVehicules().remove(vehicule);
-        vehicule.setLocation(null);
-        locationRepository.save(location);
-    }
-
-    public Location findById(Long locationId) {
-        return locationRepository.findById(locationId)
+    public LocationDTO getLocationById(Long id) {
+        Location location = locationRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Location not found"));
+        return locationMapper.toDto(location);
     }
 
-    public Vehicule findVehiculeById(Long vehiculeId) {
-        // Implement this method to find a Vehicule by its ID
-        // This is a placeholder implementation
-        return new Vehicule();
+    public LocationDTO createLocation(LocationDTO locationDTO) {
+        Location location = locationMapper.toEntity(locationDTO);
+        location = locationRepository.save(location);
+        return locationMapper.toDto(location);
+    }
+
+    public LocationDTO updateLocation(Long id, LocationDTO locationDTO) {
+        Location location = locationRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Location not found"));
+        location.setCapacity(locationDTO.getCapacity());
+        location.setLocationName(locationDTO.getLocationName());
+        location.setAllowedVehiculeTypes(locationDTO.getAllowedVehiculeTypes());
+        location = locationRepository.save(location);
+        return locationMapper.toDto(location);
+    }
+
+    public void deleteLocation(Long id) {
+        locationRepository.deleteById(id);
     }
 }
