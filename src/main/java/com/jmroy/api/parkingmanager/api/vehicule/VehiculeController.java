@@ -1,5 +1,6 @@
 package com.jmroy.api.parkingmanager.api.vehicule;
 
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,22 +18,22 @@ public class VehiculeController {
         this.vehiculeService = vehiculeService;
     }
 
-    @GetMapping
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<VehiculeDTO> getAllVehicules() {
         return vehiculeService.getAllVehicules();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public VehiculeDTO getVehiculeById(@PathVariable Long id) {
         return vehiculeService.getVehiculeById(id);
     }
 
-    @PostMapping
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public VehiculeDTO createVehicule(@RequestBody VehiculeDTO vehiculeDTO) {
         return vehiculeService.createVehicule(vehiculeDTO);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public VehiculeDTO updateVehicule(@PathVariable Long id, @RequestBody VehiculeDTO vehiculeDTO) {
         return vehiculeService.updateVehicule(id, vehiculeDTO);
     }

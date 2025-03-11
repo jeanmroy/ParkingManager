@@ -8,6 +8,7 @@ import com.jmroy.api.parkingmanager.application.location.LocationService;
 
 import java.util.List;
 
+//TODO: Implement ResponseEntity in controller methods
 @RestController
 @RequestMapping("/api/locations")
 public class LocationController {

@@ -1,5 +1,6 @@
 package com.jmroy.api.parkingmanager.api.owner;
 
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,22 +18,22 @@ public class OwnerController {
         this.ownerService = ownerService;
     }
 
-    @GetMapping
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<OwnerDTO> getAllOwners() {
         return ownerService.getAllOwners();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public OwnerDTO getOwnerById(@PathVariable Long id) {
         return ownerService.getOwnerById(id);
     }
 
-    @PostMapping
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public OwnerDTO createOwner(@RequestBody OwnerDTO ownerDTO) {
         return ownerService.createOwner(ownerDTO);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public OwnerDTO updateOwner(@PathVariable Long id, @RequestBody OwnerDTO ownerDTO) {
         return ownerService.updateOwner(id, ownerDTO);
     }
