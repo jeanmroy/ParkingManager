@@ -1,9 +1,8 @@
-package com.jmroy.api.parkingmanager.api;
+package com.jmroy.api.parkingmanager.api.location;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.jmroy.api.parkingmanager.application.location.LocationDTO;
 import com.jmroy.api.parkingmanager.application.location.LocationService;
 
 import java.util.List;

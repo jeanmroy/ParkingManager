@@ -1,6 +1,6 @@
-package com.jmroy.api.parkingmanager.application.location;
+package com.jmroy.api.parkingmanager.api.location;
 
-import com.jmroy.api.parkingmanager.application.vehicule.VehiculeMapper;
+import com.jmroy.api.parkingmanager.api.vehicule.VehiculeMapper;
 import com.jmroy.api.parkingmanager.domain.location.Location;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

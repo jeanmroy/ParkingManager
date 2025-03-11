@@ -1,4 +1,4 @@
-package com.jmroy.api.parkingmanager.application.owner;
+package com.jmroy.api.parkingmanager.api.owner;
 
 import com.jmroy.api.parkingmanager.domain.owner.Owner;
 import org.mapstruct.Mapper;

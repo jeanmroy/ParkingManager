@@ -1,4 +1,4 @@
-package com.jmroy.api.parkingmanager.application.vehicule;
+package com.jmroy.api.parkingmanager.api.vehicule;
 
 import com.jmroy.api.parkingmanager.domain.vehicule.VehiculeType;
 import lombok.Data;

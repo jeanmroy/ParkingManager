@@ -1,6 +1,10 @@
 package com.jmroy.api.parkingmanager.application.owner;
 
+import com.jmroy.api.parkingmanager.api.owner.OwnerDTO;
+import com.jmroy.api.parkingmanager.api.owner.OwnerMapper;
 import com.jmroy.api.parkingmanager.domain.owner.Owner;
+import com.jmroy.api.parkingmanager.domain.owner.OwnerRepository;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;

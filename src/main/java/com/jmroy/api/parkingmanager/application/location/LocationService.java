@@ -1,6 +1,10 @@
 package com.jmroy.api.parkingmanager.application.location;
 
+import com.jmroy.api.parkingmanager.api.location.LocationDTO;
+import com.jmroy.api.parkingmanager.api.location.LocationMapper;
 import com.jmroy.api.parkingmanager.domain.location.Location;
+import com.jmroy.api.parkingmanager.domain.location.LocationRepository;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
