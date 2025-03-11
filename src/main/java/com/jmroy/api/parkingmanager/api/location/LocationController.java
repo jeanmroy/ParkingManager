@@ -1,5 +1,6 @@
 package com.jmroy.api.parkingmanager.api.location;
 
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,22 +18,22 @@ public class LocationController {
         this.locationService = locationService;
     }
 
-    @GetMapping
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<LocationDTO> getAllLocations() {
         return locationService.getAllLocations();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public LocationDTO getLocationById(@PathVariable Long id) {
         return locationService.getLocationById(id);
     }
 
-    @PostMapping
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public LocationDTO createLocation(@RequestBody LocationDTO locationDTO) {
         return locationService.createLocation(locationDTO);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public LocationDTO updateLocation(@PathVariable Long id, @RequestBody LocationDTO locationDTO) {
         return locationService.updateLocation(id, locationDTO);
     }
