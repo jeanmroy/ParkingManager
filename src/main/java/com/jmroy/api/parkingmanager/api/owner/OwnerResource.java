@@ -7,7 +7,7 @@ import com.jmroy.api.parkingmanager.domain.vehicule.Vehicule;
 import lombok.Data;
 
 @Data
-public class OwnerDTO {
+public class OwnerResource {
     private Long id;
     private String email;
     private String firstName;

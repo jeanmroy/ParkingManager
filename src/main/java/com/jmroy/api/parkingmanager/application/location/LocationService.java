@@ -1,54 +1,53 @@
 package com.jmroy.api.parkingmanager.application.location;
 
-import com.jmroy.api.parkingmanager.api.location.LocationDTO;
-import com.jmroy.api.parkingmanager.api.location.LocationMapper;
 import com.jmroy.api.parkingmanager.domain.location.Location;
 import com.jmroy.api.parkingmanager.domain.location.LocationRepository;
+
+import lombok.RequiredArgsConstructor;
 
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class LocationService {
 
     private final LocationRepository locationRepository;
-    private final LocationMapper locationMapper;
 
-    public LocationService(LocationRepository locationRepository, LocationMapper locationMapper) {
-        this.locationRepository = locationRepository;
-        this.locationMapper = locationMapper;
+    public List<Location> getAllLocations() {
+        return locationRepository.findAll();
     }
 
-    public List<LocationDTO> getAllLocations() {
-        return locationRepository.findAll().stream()
-                .map(locationMapper::toDto)
-                .collect(Collectors.toList());
+    public Location getLocationById(Long id) {
+        return locationRepository.findById(id).orElseThrow(() -> new LocationNotFoundException(id));
     }
 
-    public LocationDTO getLocationById(Long id) {
-        Location location = locationRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Location not found"));
-        return locationMapper.toDto(location);
+    public Location createLocation(LocationForm locationForm) {
+        Location location = new Location(
+                locationForm.getCapacity(),
+                locationForm.getLocationName(),
+                locationForm.getAllowedVehiculeTypes(),
+                locationForm.getVehicules());
+
+        return locationRepository.save(location);
     }
 
-    public LocationDTO createLocation(LocationDTO locationDTO) {
-        Location location = locationMapper.toEntity(locationDTO);
-        location = locationRepository.save(location);
-        return locationMapper.toDto(location);
+    public Location updateLocation(Long id, LocationForm locationForm) {
+        Location location = getLocationById(id);
+
+        location.setCapacity(locationForm.getCapacity());
+        location.setLocationName(locationForm.getLocationName());
+        location.setAllowedVehiculeTypes(locationForm.getAllowedVehiculeTypes());
+        location.setVehicules(locationForm.getVehicules());
+
+        return locationRepository.save(location);
     }
 
-    public LocationDTO updateLocation(Long id, LocationDTO locationDTO) {
-        Location location = locationRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Location not found"));
-        location.setCapacity(locationDTO.getCapacity());
-        location.setLocationName(locationDTO.getLocationName());
-        location.setAllowedVehiculeTypes(locationDTO.getAllowedVehiculeTypes());
-        location = locationRepository.save(location);
-        return locationMapper.toDto(location);
-    }
-
+    // TODO: Think about deleting locations
+    // Delete vs soft delete?
+    // Do I want to delete an action location ? I won't physically destroy or remove
+    // a parking.. or maybe?
     public void deleteLocation(Long id) {
         locationRepository.deleteById(id);
     }

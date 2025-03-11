@@ -2,21 +2,26 @@ package com.jmroy.api.parkingmanager.api.vehicule;
 
 import com.jmroy.api.parkingmanager.domain.vehicule.Vehicule;
 
+import java.util.List;
+
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface VehiculeMapper {
 
-    @Mapping(source = "owner.id", target = "ownerId")
-    @Mapping(source = "location.id", target = "locationId")
+    @Mapping(source = "owner", target = "owner")
+    @Mapping(source = "location", target = "location")
     @Mapping(source = "color", target = "color")
     @Mapping(source = "licencePlate", target = "licencePlate")
-    VehiculeDTO toDto(Vehicule vehicule);
+    Vehicule toEntity(VehiculeResource vehiculeResource);
 
-    @Mapping(source = "ownerId", target = "owner.id")
-    @Mapping(source = "locationId", target = "location.id")
+    @Mapping(source = "owner", target = "owner")
+    @Mapping(source = "location", target = "location")
     @Mapping(source = "color", target = "color")
     @Mapping(source = "licencePlate", target = "licencePlate")
-    Vehicule toEntity(VehiculeDTO vehiculeDTO);
+    VehiculeResource toResource(Vehicule vehicule);
+
+    List<VehiculeResource> toResourceList(List<Vehicule> vehicule);
+
 }

@@ -1,61 +1,54 @@
 package com.jmroy.api.parkingmanager.application.owner;
 
-import com.jmroy.api.parkingmanager.api.owner.OwnerDTO;
-import com.jmroy.api.parkingmanager.api.owner.OwnerMapper;
 import com.jmroy.api.parkingmanager.domain.owner.Owner;
 import com.jmroy.api.parkingmanager.domain.owner.OwnerRepository;
+
+import lombok.RequiredArgsConstructor;
 
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class OwnerService {
 
     private final OwnerRepository ownerRepository;
-    private final OwnerMapper ownerMapper;
 
-    public OwnerService(OwnerRepository ownerRepository, OwnerMapper ownerMapper) {
-        this.ownerRepository = ownerRepository;
-        this.ownerMapper = ownerMapper;
+    public List<Owner> getAllOwners() {
+        return ownerRepository.findAll();
     }
 
-    public List<OwnerDTO> getAllOwners() {
-        return ownerRepository.findAll().stream()
-                .map(ownerMapper::toDto)
-                .collect(Collectors.toList());
+    public Owner getOwnerById(Long id) {
+        return ownerRepository.findById(id).orElseThrow(() -> new OwnerNotFoundException(id));
     }
 
-    public OwnerDTO getOwnerById(Long id) {
-        Owner owner = ownerRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Owner not found"));
-        return ownerMapper.toDto(owner);
+    public Owner createOwner(OwnerForm ownerForm) {
+        Owner owner = new Owner(
+                ownerForm.getEmail(),
+                ownerForm.getFirstName(),
+                ownerForm.getLastName(),
+                ownerForm.getPhoneNumber(),
+                ownerForm.getNote(),
+                ownerForm.getVehicules());
+
+        return ownerRepository.save(owner);
     }
 
-    public OwnerDTO createOwner(OwnerDTO ownerDTO) {
-        Owner owner = ownerMapper.toEntity(ownerDTO);
-        owner = ownerRepository.save(owner);
-        return ownerMapper.toDto(owner);
-    }
+    public Owner updateOwner(Long id, OwnerForm ownerForm) {
+        Owner owner = getOwnerById(id);
 
-    public OwnerDTO updateOwner(Long id, OwnerDTO ownerDTO) {
-        Owner owner = ownerRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Owner not found"));
+        owner.setEmail(ownerForm.getEmail());
+        owner.setFirstName(ownerForm.getFirstName());
+        owner.setLastName(ownerForm.getLastName());
+        owner.setPhoneNumber(ownerForm.getPhoneNumber());
+        owner.setNote(ownerForm.getNote());
+        owner.setVehicules(ownerForm.getVehicules());
 
-        owner.setFirstName(ownerDTO.getFirstName());
-        owner.setLastName(ownerDTO.getLastName());
-        owner.setEmail(ownerDTO.getEmail());
-        owner.setPhoneNumber(ownerDTO.getPhoneNumber());
-
-        owner = ownerRepository.save(owner);
-        return ownerMapper.toDto(owner);
+        return ownerRepository.save(owner);
     }
 
     public void deleteOwner(Long id) {
-        if (!ownerRepository.existsById(id)) {
-            throw new IllegalArgumentException("Owner not found");
-        }
         ownerRepository.deleteById(id);
     }
 }

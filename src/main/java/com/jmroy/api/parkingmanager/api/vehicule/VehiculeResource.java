@@ -1,10 +1,12 @@
 package com.jmroy.api.parkingmanager.api.vehicule;
 
+import com.jmroy.api.parkingmanager.domain.location.Location;
+import com.jmroy.api.parkingmanager.domain.owner.Owner;
 import com.jmroy.api.parkingmanager.domain.vehicule.VehiculeType;
 import lombok.Data;
 
 @Data
-public class VehiculeDTO {
+public class VehiculeResource {
     private Long id;
     private String brand;
     private String model;
@@ -13,6 +15,6 @@ public class VehiculeDTO {
     private String color;
     private String licencePlate;
     private VehiculeType type;
-    private Long ownerId;
-    private Long locationId;
+    private Owner owner;
+    private Location location;
 }

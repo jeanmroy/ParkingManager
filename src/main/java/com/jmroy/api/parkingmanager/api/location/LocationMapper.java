@@ -2,6 +2,9 @@ package com.jmroy.api.parkingmanager.api.location;
 
 import com.jmroy.api.parkingmanager.api.vehicule.VehiculeMapper;
 import com.jmroy.api.parkingmanager.domain.location.Location;
+
+import java.util.List;
+
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -9,8 +12,10 @@ import org.mapstruct.Mapping;
 public interface LocationMapper {
 
     @Mapping(target = "vehicules", source = "vehicules")
-    Location toEntity(LocationDTO locationDTO);
+    Location toEntity(LocationResource locationResource);
 
     @Mapping(target = "vehicules", source = "vehicules")
-    LocationDTO toDto(Location location);
+    LocationResource toResource(Location location);
+
+    List<LocationResource> toResourceList(List<Location> locations);
 }
