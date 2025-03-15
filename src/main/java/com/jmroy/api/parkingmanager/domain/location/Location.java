@@ -7,6 +7,7 @@ import com.jmroy.api.parkingmanager.domain.vehicule.Vehicule;
 import com.jmroy.api.parkingmanager.domain.vehicule.VehiculeType;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -25,7 +26,8 @@ public class Location extends BaseEntity {
 
     private int capacity;
 
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
+    @Column(unique = true)
     private LocationName locationName;
 
     @OneToMany(mappedBy = "location", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)

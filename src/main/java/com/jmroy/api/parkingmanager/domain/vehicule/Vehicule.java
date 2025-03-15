@@ -23,7 +23,7 @@ public class Vehicule extends BaseEquipment {
     private String note;
     private int eqYear;
 
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private VehiculeType type;
 
     @ManyToOne
