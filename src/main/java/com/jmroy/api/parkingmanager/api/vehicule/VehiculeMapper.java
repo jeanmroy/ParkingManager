@@ -1,13 +1,14 @@
 package com.jmroy.api.parkingmanager.api.vehicule;
 
+import com.jmroy.api.parkingmanager.api.location.LocationMapper;
+import com.jmroy.api.parkingmanager.api.owner.OwnerMapper;
 import com.jmroy.api.parkingmanager.domain.vehicule.Vehicule;
-
-import java.util.List;
-
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper(componentModel = "spring")
+import java.util.List;
+
+@Mapper(componentModel = "spring", uses = { OwnerMapper.class, LocationMapper.class })
 public interface VehiculeMapper {
 
     @Mapping(source = "owner", target = "owner")
@@ -23,5 +24,4 @@ public interface VehiculeMapper {
     VehiculeResource toResource(Vehicule vehicule);
 
     List<VehiculeResource> toResourceList(List<Vehicule> vehicule);
-
 }
