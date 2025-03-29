@@ -11,15 +11,14 @@ This is a backend-only Spring Boot project designed to manage paid parking space
 
 ## TO-DO
 
-- **Prerequisites:** Test if the application is well running in JDK17
-- **Branches:** Make a dev branch, and use proper features branches from now on.
-- **Property:** Add the `cost` property.
-- **Input Validation:** Implement robust validation in entities and services.
-- **Testing:** Write unit and integration tests to validate validations and controllers.
+- **Prerequisites:** Test if the application is well running in JDK17. It's built under JDK21 and it would be great to have the minimal version required in the doc.
+- **Property:** Add the `cost` property. As for now, there is nothing related to money in the application.
+- **Testing:** Write/Complete unit and integration tests to validate validations and controllers.
 - **Spring Security:** Enable Spring Security with username/password authentication.
 - **Security Configuration:** Set up a security filter chain to protect API endpoints.
-- **Secret Management:** Integrate a secret manager for sensitive data.
-
+- **Secret Management:** Integrate a secret manager for sensitive data. (Vault, Github secrets?).
+- **Docker:** Ensure that the docker file is still working and create a docker composite config file.
+  
 ## Prerequisites
 
 Before you can build and run this application, you'll need the following software installed on your system:
